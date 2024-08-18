@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Tasks - EarniFy{% endblock %}
+{% block content %}
+    <h1>Tasks</h1>
+    <form method="POST">
+        <input type="text" name="description" placeholder="New Task" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task.completed %}
+                    <strike>{{ task.description }}</strike> - Completed
+                {% else %}
+                    {{ task.description }}
+                    <a href="{{ url_for('complete_task', task_id=task.id) }}">Complete Task</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
